@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 @Controller
 public class MainController {
-    private HashMap<String, String> savedValues = new HashMap<>();
+    public HashMap<String, String> savedValues = new HashMap<>();
     @GetMapping("/")
     public String home(Model model){
         model.addAttribute("calculate", new Calculate());
@@ -27,5 +27,23 @@ public class MainController {
         model.addAttribute("result", result);
         return "zins";
 
+    }
+    @PostMapping("/save")
+    public String save(@ModelAttribute Calculate calculate, Model model) {
+        double amort = calculate.getAmort();
+        double zins = calculate.getZinsCost();
+        double rate = calculate.getAmort();
+
+        String saveString = "Amort: " + amort + "\nZins: " + zins + "\nRate: " + rate;
+
+        boolean containsKey = this.savedValues.containsKey(calculate.getName());
+
+        if(!containsKey){
+            this.savedValues.put(calculate.getName(), saveString);
+        }else{
+            this.savedValues.put(calculate.getName()+1, saveString);
+        }
+        model.addAttribute("map", this.savedValues);
+        return "zins";
     }
 }
