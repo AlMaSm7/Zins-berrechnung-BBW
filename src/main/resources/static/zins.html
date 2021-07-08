@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+    <title>Zins</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css} "/>
+</head>
+<body>
+<form th:action="@{/calc}" th:object="${calculate}" action="#" method="post">
+    <input type="text" placeholder="Nettopreis..." th:field="*{netto}" required>
+    <input type="text" placeholder="Anzahlung" th:field="*{anzahlung}" required>
+    <label for="zins">Zins: </label>
+    <label for="years"></label>
+    <select id="years" th:field="*{laufzeit}">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <input type="number" id="zins" th:field="*{zins}"required>
+    <input placeholder="Restwert..." th:field="*{rest}"required>
+    <button type="submit">SUBMIT</button>
+</form>
+<form th:action="@{/save}" th:object="${calculate}" action="#" method="post">
+    <input type="text" th:field="*{rate}" placeholder="rate...">
+    <input type="text" th:field="*{amort}" placeholder="amort...">
+    <input type="text" th:field="*{zinsCost}">
+</form>
+
+
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/2.0.2/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
